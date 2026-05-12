@@ -1,1 +1,117 @@
 @import "tailwindcss";
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  #blueprint-print,
+  #blueprint-print * {
+    visibility: visible !important;
+  }
+
+  #blueprint-print {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    padding: 28px;
+    color: #111827;
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    line-height: 1.45;
+  }
+
+  #blueprint-print h1 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 30px;
+  }
+
+  #blueprint-print h2 {
+    margin: 24px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #cbd5e1;
+    color: #1e293b;
+    font-size: 18px;
+  }
+
+  #blueprint-print h3 {
+    margin: 14px 0 6px;
+    color: #334155;
+    font-size: 13px;
+    text-transform: capitalize;
+  }
+
+  #blueprint-print p,
+  #blueprint-print li,
+  #blueprint-print td,
+  #blueprint-print th {
+    color: #334155;
+    font-size: 12px;
+  }
+
+  #blueprint-print ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  #blueprint-print section,
+  #blueprint-print .print-grid > div {
+    break-inside: avoid;
+  }
+
+  #blueprint-print table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  #blueprint-print th,
+  #blueprint-print td {
+    padding: 8px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+  }
+
+  #blueprint-print svg {
+    max-height: 190px;
+  }
+
+  #blueprint-print .print-slogan {
+    margin: 6px 0 14px;
+    color: #2563eb;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  #blueprint-print .print-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  #blueprint-print .rounded-xl,
+  #blueprint-print .rounded-lg {
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 6px !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  #blueprint-print .text-white,
+  #blueprint-print .text-slate-300,
+  #blueprint-print .text-slate-400,
+  #blueprint-print .text-slate-500,
+  #blueprint-print .text-blue-300,
+  #blueprint-print .text-emerald-300,
+  #blueprint-print .text-amber-300 {
+    color: #334155 !important;
+  }
+
+  #blueprint-print .bg-slate-950,
+  #blueprint-print .bg-slate-900\/60,
+  #blueprint-print .bg-slate-950\/45,
+  #blueprint-print .bg-slate-950\/50 {
+    background: #e2e8f0 !important;
+  }
+}

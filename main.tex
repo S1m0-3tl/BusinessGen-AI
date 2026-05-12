@@ -1,0 +1,421 @@
+%====================================================================
+%  Rapport de projet – BusinessGenAI (Version Simplifiée)
+%====================================================================
+%  Auteurs          : Mohamed Ettalii et Hajar Amine
+%  Encadrante       : Mme H. Bensag
+%  Module           : Python / Django
+%  Langue           : Français
+%====================================================================
+
+\documentclass[12pt,a4paper]{report}
+
+%--- Encodage et langue -------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{amssymb} % Pour le symbole \square
+
+%--- Mise en page -------------------------------------------------------
+\usepackage[
+    left=3cm,
+    right=3cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    includeheadfoot
+]{geometry}
+\usepackage{setspace}
+\onehalfspacing % Interlignage plus aéré pour la lisibilité
+
+%--- Hyperliens ---------------------------------------------------------
+\usepackage[hidelinks]{hyperref}
+
+%--- Graphiques ---------------------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{img/}}
+
+%--- Titres -------------------------------------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\LARGE\centering}
+  {\chaptername\ \thechapter}{20pt}{\LARGE}
+
+%====================================================================
+%  Début du document
+%====================================================================
+\begin{document}
+
+%--- Page de garde -------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    \includegraphics[width=0.4\textwidth]{emsi.png}
+    \vspace{1.5cm}
+    
+    {\Huge\bfseries Rapport de Projet \\[0.5em] BusinessGenAI : Le Générateur d'Idées de Business}
+    
+    \vspace{2cm}
+    {\Large
+        \textbf{Présenté par :}\\
+        Mohamed Ettalii\\
+        Hajar Amine
+        \vspace{1.5cm}
+        
+        \textbf{Encadré par :}\\
+        Mme H. Bensag
+    }
+    \vfill
+    {\large Année Universitaire 2025-2026}
+\end{titlepage}
+
+%--- Remerciements & Résumé ---------------------------------------------
+\chapter*{Remerciements}
+Nous tenons à remercier Mme H. Bensag pour son accompagnement durant ce projet de développement sous Python et Django. Ses conseils nous ont permis de mieux comprendre les enjeux de la création d'une application web moderne.
+
+\chapter*{Résumé}
+BusinessGenAI est une application web simple et intuitive destinée à aider les futurs entrepreneurs à trouver des idées de business innovantes. En utilisant une petite touche d'intelligence artificielle, l'application analyse les tendances actuelles et les besoins des utilisateurs pour proposer des concepts de projets concrets. Ce rapport explique comment nous avons construit cette application, du concept à la réalisation finale.
+
+\tableofcontents
+\newpage
+
+%====================================================================
+\chapter{Introduction Générale}
+%====================================================================
+L'envie d'entreprendre est de plus en plus présente chez les jeunes diplômés et les particuliers. Cependant, la première difficulté est souvent de trouver "la bonne idée". Beaucoup de personnes ont l'énergie et les compétences, mais stagnent faute d'un concept clair.
+
+C'est pour répondre à ce besoin que nous avons créé \textbf{BusinessGenAI}. Notre objectif est de simplifier le processus créatif en proposant un outil qui génère des idées de business basées sur des critères simples : domaine d'activité, budget disponible, et compétences de l'utilisateur.
+
+Ce projet s'inscrit dans le cadre de notre module Python et Framework Django. Il nous a permis de mettre en pratique nos connaissances en développement web et en manipulation de données.
+
+\newpage
+
+%====================================================================
+\chapter{Présentation du Projet}
+%====================================================================
+
+\section{Qu'est-ce que BusinessGenAI ?}
+BusinessGenAI n'est pas un outil complexe pour les grandes entreprises. C'est un compagnon pour l'utilisateur lambda. Il se présente comme un site web où l'on remplit un petit questionnaire, et en retour, on reçoit une liste d'idées de business avec des conseils pour commencer.
+
+\section{Objectifs du projet}
+Les buts de notre application sont simples :
+\begin{itemize}
+    \item Offrir une interface facile à utiliser.
+    \item Générer des idées originales et variées.
+    \item Donner des premières pistes de réflexion pour chaque idée.
+\end{itemize}
+
+\section{À qui s'adresse cet outil ?}
+Nous ciblons principalement :
+\begin{itemize}
+    \item Les étudiants souhaitant lancer un petit projet en parallèle de leurs études.
+    \item Les particuliers en reconversion professionnelle cherchant une nouvelle voie.
+    \item Les retraités souhaitant partager leur expérience à travers une petite activité.
+    \item Toute personne curieuse de découvrir de nouveaux créneaux porteurs.
+\end{itemize}
+
+\section{Importance de l'innovation individuelle}
+Dans un monde en constante évolution, l'innovation n'est plus seulement l'affaire des grandes entreprises. Chaque individu a le potentiel de créer de la valeur en répondant à un besoin local ou spécifique. BusinessGenAI aide à débloquer ce potentiel en fournissant un point de départ concret.
+
+\newpage
+
+%====================================================================
+\chapter{Études de Cas (Scénarios Utilisateurs)}
+%====================================================================
+Pour mieux comprendre l'utilité de BusinessGenAI, voici quelques exemples d'utilisation par des profils variés.
+
+\section{Sarah, étudiante en design}
+Sarah cherche à arrondir ses fins de mois. Elle entre ses compétences en graphisme et son budget de 0 €.
+\textbf{Résultat :} "Lancer une boutique de stickers personnalisés pour ordinateurs portables sur une plateforme de troc locale."
+
+\section{Marc, ancien comptable}
+Marc souhaite quitter le salariat. Il a un petit budget et des compétences en gestion.
+\textbf{Résultat :} "Service de conseil en micro-gestion pour les petites associations de quartier."
+
+\section{Julie, passionnée de cuisine}
+Julie adore cuisiner des desserts mais ne sait pas comment en faire un business.
+\textbf{Résultat :} "Ateliers de pâtisserie en ligne pour les parents pressés."
+
+\section{Karim, retraité passionné de bricolage}
+Karim veut rester actif et aider ses voisins.
+\textbf{Résultat :} "Service de 'Petit Bricolage à la demande' pour le quartier."
+
+\newpage
+
+%====================================================================
+\chapter{Analyse et Conception}
+%====================================================================
+
+\section{Modélisation Simplifiée}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{emsi.png}
+    \caption{Placeholder pour le schéma de fonctionnement (Image à insérer)}
+\end{figure}
+
+\subsection{Cas d'utilisation}
+L'utilisateur peut créer un compte, remplir ses critères et générer une idée.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{emsi.png}
+    \caption{Placeholder pour le diagramme de cas d'utilisation (Image à insérer)}
+\end{figure}
+
+\newpage
+
+%====================================================================
+\chapter{Outils et Technologies}
+%====================================================================
+
+\section{Le framework Django}
+Django est le moteur de notre site. Il nous permet de gérer les comptes utilisateurs et la base de données de manière très simple et sécurisée.
+
+\section{L'Intelligence Artificielle}
+Pour générer les idées, nous utilisons une technologie d'IA qui permet de créer des textes cohérents et créatifs à partir de mots-clés simples.
+
+\newpage
+
+%====================================================================
+\chapter{Réalisation du projet}
+%====================================================================
+
+\section{Interface Utilisateur}
+L'interface a été faite pour être claire sur tous les écrans (Ordinateur, Tablette, Mobile).
+
+\subsection{Page d'accueil}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{emsi.png}
+    \caption{Capture d'écran de la page d'accueil (Image à insérer)}
+\end{figure}
+
+\subsection{Génération d'idée}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{emsi.png}
+    \caption{Capture d'écran de la fonctionnalité de génération (Image à insérer)}
+\end{figure}
+
+\newpage
+
+%====================================================================
+\chapter{Informations Pratiques}
+%====================================================================
+
+\section{Comment tester son idée sans argent ?}
+\begin{itemize}
+    \item \textbf{Le bouche-à-oreille :} Parlez de votre idée gratuitement.
+    \item \textbf{Les réseaux sociaux :} Créez une page sans frais.
+    \item \textbf{L'échange de services :} Trocquez vos compétences.
+\end{itemize}
+
+\section{Développement Durable}
+Nous encourageons nos utilisateurs à penser "Eco-responsable". Beaucoup des idées générées favorisent l'économie locale ou le recyclage.
+
+\newpage
+
+%====================================================================
+\chapter{Approfondissement de l'Idée}
+%====================================================================
+
+\section{Comment choisir son domaine ?}
+Beaucoup d'utilisateurs hésitent entre plusieurs domaines. BusinessGenAI vous conseille de regarder trois points :
+\begin{itemize}
+    \item \textbf{Vos Passions :} Qu'est-ce que vous pourriez faire pendant 10 heures sans vous fatiguer ?
+    \item \textbf{Vos Compétences :} Dans quoi êtes-vous naturellement bon ou qu'avez-vous appris ?
+    \item \textbf{Le Marché :} Est-ce que des gens ont un problème que vous pouvez résoudre ?
+\end{itemize}
+
+\section{La méthode du 'Cercle d'Or'}
+Commencez par le "Pourquoi" (votre mission), puis le "Comment" (votre méthode), et enfin le "Quoi" (votre produit). BusinessGenAI vous aide principalement sur le "Quoi", mais c'est à vous de définir votre "Pourquoi".
+
+\newpage
+
+%====================================================================
+\chapter{Communiquer sur son projet}
+%====================================================================
+
+\section{Réussir son premier Pitch}
+Le pitch est une présentation de 2 minutes. Voici la structure conseillée :
+\begin{enumerate}
+    \item \textbf{L'accroche :} Captez l'attention avec une question ou un chiffre.
+    \item \textbf{Le problème :} Expliquez la difficulté rencontrée par vos futurs clients.
+    \item \textbf{La solution :} Présentez votre idée générée par BusinessGenAI.
+    \item \textbf{L'appel à l'action :} Dites ce que vous attendez de votre interlocuteur.
+\end{enumerate}
+
+\section{Utiliser les réseaux sociaux}
+Ne cherchez pas à être partout. Choisissez le réseau où se trouvent vos clients :
+\begin{itemize}
+    \item \textbf{Instagram :} Pour les produits visuels (cuisine, artisanat).
+    \item \textbf{LinkedIn :} Pour les services aux professionnels.
+    \item \textbf{Facebook :} Pour les services locaux de quartier.
+\end{itemize}
+
+\newpage
+
+%====================================================================
+\chapter{Histoires de Succès}
+%====================================================================
+Voici quelques exemples inspirants de personnes qui ont commencé avec une idée simple.
+
+\section{L'exemple de l'artisan local}
+Un menuisier qui a commencé par réparer des chaises dans son garage et qui possède aujourd'hui un atelier complet. Il a su utiliser les outils numériques pour se faire connaître.
+
+\section{L'étudiant entrepreneur}
+Une étudiante qui a créé un service de livraison de petits-déjeuners sur son campus et qui a fini par embaucher trois autres étudiants.
+
+\newpage
+
+%====================================================================
+\chapter{L'Avenir de l'Entrepreneuriat}
+%====================================================================
+
+\section{La Veille Technologique}
+Le monde change vite. Un bon entrepreneur doit rester informé des nouvelles tendances. BusinessGenAI est une première étape, mais l'apprentissage ne s'arrête jamais.
+
+\section{L'IA comme Partenaire}
+L'intelligence artificielle n'est pas là pour remplacer l'entrepreneur, mais pour décupler ses capacités. C'est un outil de brainstorming infatigable qui est disponible 24h/24.
+
+\newpage
+
+%====================================================================
+\chapter{Le Pouvoir de la Communauté}
+%====================================================================
+
+\section{S'entourer pour réussir}
+L'entrepreneuriat peut être solitaire. Rejoindre des groupes d'entrepreneurs locaux ou des forums en ligne permet d'échanger des conseils et de garder la motivation.
+
+\section{Le Mentorat}
+Trouver quelqu'un qui a déjà fait le chemin peut vous faire gagner des mois de travail. Un mentor n'est pas forcément un expert mondial, cela peut être un commerçant du quartier qui a réussi.
+
+\newpage
+
+%====================================================================
+\chapter{Gestion du Temps et Productivité}
+%====================================================================
+
+\section{La méthode Pomodoro}
+Travailler par blocs de 25 minutes permet de rester concentré. C'est idéal quand on lance un projet en plus de ses études ou de son travail.
+
+\section{Prioriser ses tâches}
+Ne faites pas tout à la fois. Concentrez-vous sur ce qui apporte de la valeur à vos clients en premier.
+
+\newpage
+
+%====================================================================
+\chapter{L'Échec Constructif}
+%====================================================================
+
+\section{Se tromper pour apprendre}
+Toutes les idées ne marcheront pas du premier coup. L'important est de tester vite et à bas coût pour pouvoir pivoter si besoin.
+
+\section{Rester résilient}
+La résilience est la qualité numéro 1 de l'entrepreneur. Chaque "Non" vous rapproche d'un "Oui".
+
+\newpage
+
+%====================================================================
+\chapter{Choisir ses Outils Numériques}
+%====================================================================
+
+\section{Les outils gratuits indispensables}
+\begin{itemize}
+    \item \textbf{Canva :} Pour créer vos visuels.
+    \item \textbf{Trello :} Pour organiser vos tâches.
+    \item \textbf{WhatsApp Business :} Pour communiquer avec vos clients.
+\end{itemize}
+
+\section{Automatiser les tâches simples}
+Utilisez des outils simples pour ne pas passer votre temps sur l'administratif et vous concentrer sur votre passion.
+
+\newpage
+
+%====================================================================
+\chapter*{FAQ : Questions Fréquemment Posées}
+\addcontentsline{toc}{chapter}{FAQ : Questions Fréquemment Posées}
+%====================================================================
+\section*{Est-ce que les idées sont vraiment uniques ?}
+L'IA combine les concepts de manière créative selon vos critères, ce qui rend chaque proposition originale.
+
+\section*{Combien coûte l'utilisation ?}
+BusinessGenAI est entièrement gratuit pour les utilisateurs individuels.
+
+\newpage
+
+%====================================================================
+\chapter*{Guide d'Installation Rapide}
+\addcontentsline{toc}{chapter}{Guide d'Installation Rapide}
+%====================================================================
+1. Installez Python. \\
+2. Installez Django : \texttt{pip install django}. \\
+3. Lancez le serveur : \texttt{python manage.py runserver}.
+
+\newpage
+
+%====================================================================
+\chapter*{Glossaire de l'Entrepreneuriat}
+\addcontentsline{toc}{chapter}{Glossaire de l'Entrepreneuriat}
+%====================================================================
+\begin{description}
+    \item[Cible] Le groupe de personnes à qui vous vendez.
+    \item[MVP] Version simple de votre idée pour commencer.
+    \item[Pitch] Courte présentation de votre idée.
+\end{description}
+
+\newpage
+
+%====================================================================
+\chapter*{Checklist de Lancement}
+\addcontentsline{toc}{chapter}{Checklist de Lancement}
+%====================================================================
+\begin{itemize}
+    \item[$\square$] Valider l'idée avec son entourage.
+    \item[$\square$] Étudier la concurrence locale.
+    \item[$\square$] Fixer un prix de vente simple.
+    \item[$\square$] Créer une page sur les réseaux sociaux.
+\end{itemize}
+
+\newpage
+
+%====================================================================
+\chapter*{Exemples de Business par Catégorie}
+\addcontentsline{toc}{chapter}{Exemples de Business par Catégorie}
+%====================================================================
+\section*{Technologie}
+\begin{itemize}
+    \item Création de sites web pour artisans locaux.
+    \item Formation au numérique pour les seniors.
+\end{itemize}
+
+\section*{Environnement}
+\begin{itemize}
+    \item Collecte de marc de café pour le compost.
+    \item Atelier de réparation d'électroménager.
+\end{itemize}
+
+\newpage
+
+%====================================================================
+\chapter*{Fiches Pratiques}
+\addcontentsline{toc}{chapter}{Fiches Pratiques}
+%====================================================================
+\section*{Le Business de Service}
+Le plus facile à lancer car il demande peu d'investissement. Votre principal atout est votre temps.
+
+\section*{Le Business Numérique}
+Permet d'automatiser vos revenus, mais demande du travail de création au début.
+
+\newpage
+
+%====================================================================
+\chapter*{Conclusion Finale}
+\addcontentsline{toc}{chapter}{Conclusion Finale}
+%====================================================================
+Osez vous lancer ! Chaque idée générée est une graine. C'est à vous de l'arroser avec votre travail.
+
+\vspace{2cm}
+\begin{center}
+    \textit{"La meilleure façon de prédire l'avenir, c'est de le créer."}\\
+    --- Peter Drucker
+\end{center}
+
+\end{document}
